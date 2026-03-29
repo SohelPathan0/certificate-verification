@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Certificate Verification</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 1rem;
+  }
+  header {
+    padding: 2rem 0 1rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.8rem;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  main {
+    flex-grow: 1;
+    max-width: 420px;
+    margin: 0 auto;
+    background: rgba(255 255 255 / 0.1);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+  }
+  button {
+    margin-top: 1.5rem;
+    width: 100%;
+    background: #5a4fcf;
+    border: none;
+    padding: 0.8rem;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #473db5;
+  }
+  #result {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(255 255 255 / 0.2);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    min-height: 4.5rem;
+    text-align: center;
+  }
+  #result.invalid {
+    color: #ff6b6b;
+  }
+  #result.valid {
+    color: #9bf6ff;
+  }
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  @media (max-width: 480px) {
+    main {
+      padding: 1.5rem 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  Certificate Verification
+</header>
+<main>
+  <label for="certId">Enter your Certificate ID:</label>
+  <input type="text" id="certId" placeholder="e.g. CERT001" autocomplete="off" />
+  <button onclick="verify()">Verify</button>
+  <div id="result"></div>
+</main>
+<footer>
+  &copy; 2026 GitHub Copilot Dev Days
+</footer>
+
+<script>
+  async function verify() {
+    const resultDiv = document.getElementById('result');
+    const certId = document.getElementById('certId').value.trim().toUpperCase();
+
+    if (!certId) {
+      resultDiv.textContent = 'Please enter a Certificate ID.';
+      resultDiv.className = 'invalid';
+      return;
+    }
+
+    try {
+      const response = await fetch('data.json');
+      if (!response.ok) throw new Error('Could not load data');
+      const data = await response.json();
+
+      if (data[certId]) {
+        const cert = data[certId];
+        resultDiv.className = 'valid';
+        resultDiv.innerHTML = `
+          <strong>Certificate Verified!</strong><br>
+          Name: ${cert.name}<br>
+          Course: ${cert.course}<br>
+          Date: ${cert.date}
+        `;
+      } else {
+        resultDiv.className = 'invalid';
+        resultDiv.textContent = 'Invalid Certificate ID. Please check and try again.';
+      }
+    } catch (error) {
+      resultDiv.className = 'invalid';
+      resultDiv.textContent = 'Error fetching certificate data. Please try again later.';
+    }
+  }
+
+  // Auto-verify if ?id=CERTxxx in URL
+  async function verifyFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const certId = params.get('id');
+    if (certId) {
+      document.getElementById('certId').value = certId.toUpperCase();
+      verify();
+    }
+  }
+  window.onload = verifyFromURL;
+</script>
+</body>
+</html>
