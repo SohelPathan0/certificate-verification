@@ -217,4 +217,8 @@ Feel free to fork and adapt it for your own events.
 
 ---
 
+<div align="center">
+
 **Powered by Microsoft &amp; GitHub**
+
+</div>
