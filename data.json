@@ -82,6 +82,8 @@
     { "id": "GCDM-080", "name": "Preet Shah", "event": "GitHub Copilot Dev Days | Mumbai", "role": "Participant" },
     { "id": "GCDM-081", "name": "Sohel Pathan", "event": "GitHub Copilot Dev Days | Mumbai", "role": "Participant" },
     { "id": "GCDM-082", "name": "Harman Saini", "event": "GitHub Copilot Dev Days | Mumbai", "role": "Participant" },
-    { "id": "GCDM-083", "name": "Satyam Kakade", "event": "GitHub Copilot Dev Days | Mumbai", "role": "Participant" }
+    { "id": "GCDM-083", "name": "Satyam Kakade", "event": "GitHub Copilot Dev Days | Mumbai", "role": "Participant" },
+    { "id": "GCDM-084", "name": "Ruksana Shaikh", "event": "GitHub Copilot Dev Days | Mumbai", "role": "Participant" }
+
   ]
 }
