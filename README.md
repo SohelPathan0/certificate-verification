@@ -38,22 +38,24 @@ certificate-verification/
 ```
 
 ---
+<div align="center">
 
 ## ⚙️ How It Works
 
 ```
 Certificate (PDF / Image)
   ├── Unique Link  →  https://SohelPathan0.github.io/certificate-verification/?id=GCDM-081
-  └── QR Code      →  encodes the same URL above
-                              ↓
-              Verification page loads
-                              ↓
-          Fetches data.json from GitHub
-                              ↓
-       Looks up participant by certificate ID
-                              ↓
-    ✅ Shows participant details  OR  ❌ Invalid certificate
+  └── QR Code      →   encodes the same URL above
+                                  ↓
+                        Verification page loads
+                                  ↓
+                     Fetches data.json from GitHub
+                                  ↓
+                Looks up participant by certificate ID
+                                  ↓
+        ✅ Shows participant details  OR  ❌ Invalid certificate
 ```
+</div>
 
 When a participant opens their unique link or scans their QR code:
 
